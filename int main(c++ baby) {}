@@ -1,0 +1,60 @@
+#include <iostream> 
+ 
+#define PRINT(x) std::cout << x << std::endl; 
+#define HELLO std::cout << "hello" << std::endl; 
+ 
+struct Some_str { 
+    int num = 0; 
+}; 
+ 
+struct Some_arr { 
+    Some_str arr[5]; 
+}; 
+ 
+void show_from_struct(Some_str& st) { 
+    int num = st.num; 
+    PRINT(num); 
+} 
+void show_hello() { 
+    std::string hello = "Hello World"; 
+ 
+    PRINT(hello); 
+ 
+    Some_str st; 
+    st.num = 10; 
+ 
+    Some_str* new_st = new Some_str(10); 
+    show_from_struct(*new_st); 
+    delete new_st; 
+} 
+ +
+int main() { 
+    show_hello(); 
+ 
+    PRINT("hello"); 
+    HELLO 
+ 
+        Some_str st; 
+    st.num = 10; 
+ 
+    show_from_struct(st); 
+ 
+    Some_arr arr; 
+    arr.arr[0] = st; 
+    show_from_struct(arr.arr[0]); 
+ 
+    Some_arr qqq[5]; 
+    qqq[2] = arr; 
+    PRINT(qqq[2].arr[0].num); 
+ 
+    Some_str* new_st = new Some_str(10); 
+    show_from_struct(*new_st); 
+ 
+    arr.arr[0] = *new_st; // в arr.arr[0] хранится тот же самый объект, что и new_st или это разные объекты 
+    *&new_st->num = 12; 
+    show_from_struct(arr.arr[0]); 
+    show_from_struct(*new_st); 
+    delete new_st; 
+ 
+    return 0; 
+}
