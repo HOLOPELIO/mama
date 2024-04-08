@@ -1,0 +1,31 @@
+#include <iostream>
+#include <boost/test/minimal.hpp>
+
+using namespace std;
+
+string get_str(int num) {
+    string str;
+    
+    for (int i = 0; i < num; i++) {
+        str += to_string(i);
+        
+        if (i != (num - 1)) {
+            str += ' ';
+        }
+    }
+    return str;
+}
+
+void test_get_str() {
+    int num = 5;
+    string result = "0 1 2 3 4";
+    
+    string test_result = get_str(num);
+    
+    BOOST_CHECK(test_result == result);
+}
+
+int test_main(int, char*[]) {
+    test_get_str();
+    return boost::exit_success;
+}
